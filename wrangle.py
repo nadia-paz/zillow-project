@@ -7,10 +7,10 @@ import numpy as np
 #warnings.filterwarnings("ignore")
 
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import QuantileTransformer
 
-from sklearn.feature_selection import SelectKBest, RFE, f_regression, SequentialFeatureSelector
+from sklearn.feature_selection import SelectKBest, RFE, f_regression
 from sklearn.linear_model import LinearRegression
 
 from env import get_db_url
@@ -117,14 +117,14 @@ def transform_columns(df):
     df['house_age'] = 2017 - df.year_built
 
     # change the type of bedrooms/sq_feet/home_value/pools to integer
-    df['bedrooms'] = np.array(df['bedrooms'].values, dtype='uint8')
-    df['bathrooms'] = np.array(df['bathrooms'].values, dtype='uint8')
-    df['year_built'] = np.array(df['year_built'].values, dtype=int)
-    df['sq_feet'] = np.array(df['sq_feet'].values, dtype=int)
-    df['lot_sqft'] = np.array(df['lot_sqft'].values, dtype=int)
-    df['home_value'] = np.array(df['home_value'].values, dtype=int)
-    df['house_age'] = np.array(df['house_age'].values, dtype='uint8')
-    df['pools'] = np.array(df['pools'].values, dtype='uint8')
+    df.loc[:,'bedrooms'] = np.array(df['bedrooms'].values, dtype='uint8')
+    df.loc[:,'bathrooms'] = np.array(df['bathrooms'].values, dtype='uint8')
+    df.loc[:,'year_built'] = np.array(df['year_built'].values, dtype=int)
+    df.loc[:,'sq_feet'] = np.array(df['sq_feet'].values, dtype=int)
+    df.loc[:,'lot_sqft'] = np.array(df['lot_sqft'].values, dtype=int)
+    df.loc[:,'home_value'] = np.array(df['home_value'].values, dtype=int)
+    df.loc[:,'house_age'] = np.array(df['house_age'].values, dtype='uint8')
+    df.loc[:,'pools'] = np.array(df['pools'].values, dtype='uint8')
 
     #rearange columns and drop 'fips'
     cols = ['bedrooms',
@@ -167,8 +167,9 @@ def handle_outliers(df):
     df = df[df.bedrooms != 0]
 
     # remove home values outliers
-    #q = df.home_value.quantile(0.99)
-    #df = df[df.home_value < q] # 511
+    # can not remvoe minimum outliers. way too many values
+    #q = df.home_value.quantile(0.01)
+    #df = df[df.home_value > q] 
     df = df[df.home_value < 2_000_000] # 519
 
     # remove lot_sqft below quantile 0.99
@@ -313,6 +314,3 @@ def full_split3_zillow(train, validate, test, target):
     test.drop(columns = target, inplace=True)
 
     return train, validate, test, y_train, y_validate, y_test
-
-
-
