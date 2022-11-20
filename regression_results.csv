@@ -1,0 +1,138 @@
+,model_name,features,scaling,RMSE_train,R2_train,RMSE_validate,R2_validate,RMSE_difference
+0,Linear Regression,f1,standard,298497,0.28,293440,0.29,5057
+1,Generalized Linear Model,f1,standard,305714,0.25,300067,0.26,5647
+2,Gradient Boosting Regression,f1,standard,282210,0.36,281158,0.35,1052
+3,Decision Tree Regression,f1,standard,287583,0.33,284137,0.33,3446
+4,Random Forest Regression,f1,standard,286103,0.34,282643,0.34,3460
+5,LassoLars Regression,f1,standard,298497,0.28,293440,0.29,5057
+6,Linear Regression,f2,standard,330832,0.12,325968,0.12,4864
+7,Generalized Linear Model,f2,standard,331266,0.12,326168,0.12,5098
+8,Gradient Boosting Regression,f2,standard,307774,0.24,302498,0.24,5276
+9,Decision Tree Regression,f2,standard,307975,0.24,302902,0.24,5073
+10,Random Forest Regression,f2,standard,307934,0.24,302758,0.24,5176
+11,LassoLars Regression,f2,standard,330832,0.12,325968,0.12,4864
+12,Linear Regression,f3,standard,297759,0.29,292535,0.29,5224
+13,Generalized Linear Model,f3,standard,305037,0.25,299340,0.26,5697
+14,Gradient Boosting Regression,f3,standard,281581,0.36,280589,0.35,992
+15,Decision Tree Regression,f3,standard,287583,0.33,284137,0.33,3446
+16,Random Forest Regression,f3,standard,286078,0.34,282632,0.34,3446
+17,LassoLars Regression,f3,standard,297759,0.29,292535,0.29,5224
+18,Linear Regression,f4,standard,300360,0.27,294945,0.28,5415
+19,Generalized Linear Model,f4,standard,305129,0.25,299431,0.26,5698
+20,Gradient Boosting Regression,f4,standard,285209,0.34,283665,0.33,1544
+21,Decision Tree Regression,f4,standard,288388,0.33,284318,0.33,4070
+22,Random Forest Regression,f4,standard,287719,0.33,283655,0.33,4064
+23,LassoLars Regression,f4,standard,300360,0.27,294945,0.28,5415
+24,Linear Regression,f5,standard,296641,0.29,291545,0.3,5096
+25,Generalized Linear Model,f5,standard,304372,0.25,298715,0.26,5657
+26,Gradient Boosting Regression,f5,standard,271862,0.4,270708,0.39,1154
+27,Decision Tree Regression,f5,standard,286165,0.34,283305,0.34,2860
+28,Random Forest Regression,f5,standard,284177,0.35,281244,0.35,2933
+29,LassoLars Regression,f5,standard,296641,0.29,291545,0.3,5096
+30,Linear Regression,f6,standard,298357,0.28,293341,0.29,5016
+31,Generalized Linear Model,f6,standard,305686,0.25,300038,0.26,5648
+32,Gradient Boosting Regression,f6,standard,277936,0.38,276324,0.37,1612
+33,Decision Tree Regression,f6,standard,286533,0.34,283273,0.34,3260
+34,Random Forest Regression,f6,standard,284685,0.35,281324,0.35,3361
+35,LassoLars Regression,f6,standard,298357,0.28,293341,0.29,5016
+36,Linear Regression,f7,standard,295933,0.29,290617,0.3,5316
+37,Generalized Linear Model,f7,standard,304357,0.25,298700,0.26,5657
+38,Gradient Boosting Regression,f7,standard,269976,0.41,269407,0.4,569
+39,Decision Tree Regression,f7,standard,285674,0.34,282026,0.34,3648
+40,Random Forest Regression,f7,standard,282946,0.35,279782,0.35,3164
+41,LassoLars Regression,f7,standard,295933,0.29,290617,0.3,5316
+42,Linear Regression,f1,quantile,298566,0.28,293505,0.29,5061
+43,Generalized Linear Model,f1,quantile,305944,0.25,300307,0.25,5637
+44,Gradient Boosting Regression,f1,quantile,282210,0.36,281158,0.35,1052
+45,Decision Tree Regression,f1,quantile,287583,0.33,284137,0.33,3446
+46,Random Forest Regression,f1,quantile,286103,0.34,282643,0.34,3460
+47,LassoLars Regression,f1,quantile,298566,0.28,293505,0.29,5061
+48,Linear Regression,f2,quantile,330832,0.12,325968,0.12,4864
+49,Generalized Linear Model,f2,quantile,328290,0.13,323157,0.14,5133
+50,Gradient Boosting Regression,f2,quantile,307774,0.24,302498,0.24,5276
+51,Decision Tree Regression,f2,quantile,307975,0.24,302902,0.24,5073
+52,Random Forest Regression,f2,quantile,307934,0.24,302758,0.24,5176
+53,LassoLars Regression,f2,quantile,330832,0.12,325968,0.12,4864
+54,Linear Regression,f3,quantile,297824,0.29,292597,0.29,5227
+55,Generalized Linear Model,f3,quantile,305281,0.25,299603,0.26,5678
+56,Gradient Boosting Regression,f3,quantile,281581,0.36,280589,0.35,992
+57,Decision Tree Regression,f3,quantile,287583,0.33,284137,0.33,3446
+58,Random Forest Regression,f3,quantile,286078,0.34,282632,0.34,3446
+59,LassoLars Regression,f3,quantile,297824,0.29,292597,0.29,5227
+60,Linear Regression,f4,quantile,300409,0.27,294998,0.28,5411
+61,Generalized Linear Model,f4,quantile,305528,0.25,299845,0.26,5683
+62,Gradient Boosting Regression,f4,quantile,285209,0.34,283665,0.33,1544
+63,Decision Tree Regression,f4,quantile,288388,0.33,284318,0.33,4070
+64,Random Forest Regression,f4,quantile,287719,0.33,283655,0.33,4064
+65,LassoLars Regression,f4,quantile,300409,0.27,294999,0.28,5410
+66,Linear Regression,f5,quantile,296706,0.29,291606,0.3,5100
+67,Generalized Linear Model,f5,quantile,304614,0.25,298975,0.26,5639
+68,Gradient Boosting Regression,f5,quantile,271862,0.4,270709,0.39,1153
+69,Decision Tree Regression,f5,quantile,286165,0.34,283305,0.34,2860
+70,Random Forest Regression,f5,quantile,284177,0.35,281244,0.35,2933
+71,LassoLars Regression,f5,quantile,296706,0.29,291606,0.3,5100
+72,Linear Regression,f6,quantile,298424,0.28,293406,0.29,5018
+73,Generalized Linear Model,f6,quantile,305934,0.25,300296,0.25,5638
+74,Gradient Boosting Regression,f6,quantile,277936,0.38,276321,0.37,1615
+75,Decision Tree Regression,f6,quantile,286533,0.34,283273,0.34,3260
+76,Random Forest Regression,f6,quantile,284685,0.35,281324,0.35,3361
+77,LassoLars Regression,f6,quantile,298424,0.28,293406,0.29,5018
+78,Linear Regression,f7,quantile,296000,0.29,290681,0.3,5319
+79,Generalized Linear Model,f7,quantile,304598,0.25,298957,0.26,5641
+80,Gradient Boosting Regression,f7,quantile,269976,0.41,269407,0.4,569
+81,Decision Tree Regression,f7,quantile,285674,0.34,282026,0.34,3648
+82,Random Forest Regression,f7,quantile,282946,0.35,279782,0.35,3164
+83,LassoLars Regression,f7,quantile,296000,0.29,290681,0.3,5319
+84,Linear Regression,rfe,standard,297363,0.29,292245,0.29,5118
+85,Generalized Linear Model,rfe,standard,304877,0.25,299229,0.26,5648
+86,Gradient Boosting Regression,rfe,standard,276467,0.38,274858,0.38,1609
+87,Decision Tree Regression,rfe,standard,285684,0.34,281886,0.34,3798
+88,Random Forest Regression,rfe,standard,283188,0.35,279839,0.35,3349
+89,LassoLars Regression,rfe,standard,297363,0.29,292245,0.29,5118
+90,Linear Regression,f1_poly,standard,283704,0.35,278307,0.36,5397
+91,Generalized Linear Model,f1_poly,standard,293326,0.31,297805,0.27,4479
+92,Gradient Boosting Regression,f1_poly,standard,270110,0.41,270338,0.4,228
+93,Decision Tree Regression,f1_poly,standard,285200,0.34,282305,0.34,2895
+94,Random Forest Regression,f1_poly,standard,282170,0.36,279504,0.35,2666
+95,LassoLars Regression,f1_poly,standard,283704,0.35,278308,0.36,5396
+96,Linear Regression,f2_poly,standard,289608,0.32,283424,0.34,6184
+97,Generalized Linear Model,f2_poly,standard,300165,0.28,293880,0.29,6285
+98,Gradient Boosting Regression,f2_poly,standard,270048,0.41,269736,0.4,312
+99,Decision Tree Regression,f2_poly,standard,285674,0.34,282026,0.34,3648
+100,Random Forest Regression,f2_poly,standard,282947,0.35,279784,0.35,3163
+101,LassoLars Regression,f2_poly,standard,289608,0.32,283425,0.34,6183
+102,Linear Regression,f3_poly,standard,283677,0.35,278354,0.36,5323
+103,Generalized Linear Model,f3_poly,standard,292562,0.31,298404,0.26,5842
+104,Gradient Boosting Regression,f3_poly,standard,269674,0.41,270166,0.4,492
+105,Decision Tree Regression,f3_poly,standard,285109,0.34,282354,0.34,2755
+106,Random Forest Regression,f3_poly,standard,282053,0.36,279506,0.35,2547
+107,LassoLars Regression,f3_poly,standard,284577,0.35,279190,0.36,5387
+108,Linear Regression,f4_poly,standard,286549,0.34,281287,0.35,5262
+109,Generalized Linear Model,f4_poly,standard,293640,0.31,301329,0.25,7689
+110,Gradient Boosting Regression,f4_poly,standard,271020,0.41,270803,0.39,217
+111,Decision Tree Regression,f4_poly,standard,285144,0.34,281831,0.34,3313
+112,Random Forest Regression,f4_poly,standard,282509,0.36,279392,0.35,3117
+113,LassoLars Regression,f4_poly,standard,287432,0.33,282474,0.34,4958
+114,Linear Regression,f5_poly,standard,278986,0.37,274133,0.38,4853
+115,Generalized Linear Model,f5_poly,standard,288225,0.33,290497,0.3,2272
+116,Gradient Boosting Regression,f5_poly,standard,267871,0.42,268988,0.4,1117
+117,Decision Tree Regression,f5_poly,standard,284225,0.35,281108,0.35,3117
+118,Random Forest Regression,f5_poly,standard,280326,0.37,277663,0.36,2663
+119,LassoLars Regression,f5_poly,standard,281774,0.36,276591,0.37,5183
+120,Linear Regression,f6_poly,standard,282506,0.36,276987,0.37,5519
+121,Generalized Linear Model,f6_poly,standard,291370,0.32,291624,0.3,254
+122,Gradient Boosting Regression,f6_poly,standard,269052,0.42,269804,0.4,752
+123,Decision Tree Regression,f6_poly,standard,284768,0.35,282591,0.34,2177
+124,Random Forest Regression,f6_poly,standard,281635,0.36,279041,0.36,2594
+125,LassoLars Regression,f6_poly,standard,284771,0.35,279333,0.35,5438
+126,Linear Regression,f7_poly,standard,277837,0.38,273219,0.38,4618
+127,Generalized Linear Model,f7_poly,standard,287594,0.33,290085,0.3,2491
+128,Gradient Boosting Regression,f7_poly,standard,267400,0.42,269094,0.4,1694
+129,Decision Tree Regression,f7_poly,standard,284225,0.35,281108,0.35,3117
+130,Random Forest Regression,f7_poly,standard,280157,0.37,277610,0.36,2547
+131,LassoLars Regression,f7_poly,standard,283423,0.35,278237,0.36,5186
+132,Single Linear Regression,bedrooms,standard,342329,0.06,336890,0.06,5439
+133,Single Linear Regression,bathrooms,standard,331662,0.11,327084,0.12,4578
+134,Single Linear Regression,sq_feet,standard,301680,0.27,296552,0.27,5128
+135,Single Linear Regression,lot_sqft,standard,348182,0.02,343313,0.03,4869
+136,Single Linear Regression,house_age,standard,342565,0.05,337964,0.06,4601
