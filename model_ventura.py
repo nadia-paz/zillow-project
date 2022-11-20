@@ -1,14 +1,10 @@
 import pandas as pd
 import numpy as np
 
-from sklearn.model_selection import train_test_split
+
 from sklearn.preprocessing import  PolynomialFeatures
-
-
-from sklearn.feature_selection import SelectKBest, RFE, f_regression, SequentialFeatureSelector
-
-from sklearn.metrics import mean_squared_error, r2_score, explained_variance_score
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.feature_selection import RFE
+from sklearn.metrics import mean_squared_error, explained_variance_score
 
 # linear regressions
 from sklearn.linear_model import LinearRegression, LassoLars, TweedieRegressor
@@ -16,7 +12,6 @@ from sklearn.linear_model import LinearRegression, LassoLars, TweedieRegressor
 # non-linear regressions
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
-from sklearn.svm import SVR
 
 import wrangle as wr
 
