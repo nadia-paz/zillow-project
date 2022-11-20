@@ -41,9 +41,9 @@ X_train, X_validate, X_test, y_train, y_validate, y_test = wr.full_split_zillow(
 
 # get scaled X_train, X_validate, X_test sets
 # standard scaler
-X1, X2, _ = wr.standard_scale_zillow(X_train, X_validate, X_test)
+X1, X2, X3 = wr.standard_scale_zillow(X_train, X_validate, X_test)
 # quantile scaler
-XQ1, XQ2, _ = wr.scale_zillow_quantile(X_train, X_validate, X_test)
+XQ1, XQ2, XQ3 = wr.scale_zillow_quantile(X_train, X_validate, X_test)
 
 # get a baseline value = median of the train set's target
 baseline = y_train.median()
@@ -74,13 +74,14 @@ models = {
     }
 
 # create lists of features and save them in the dictionary
-f1 = ['bedrooms', 'bathrooms', 'sq_feet']
+f1 = ['bedrooms', 'bathrooms', 'sq_feet'] # same as select_kbest with k=3
 f2 = ['bedrooms', 'bathrooms']
 f3 = ['bedrooms','bathrooms','sq_feet', 'pools']
 f4 = ['bathrooms','sq_feet', 'pools']
 f5 = ['bedrooms','bathrooms','sq_feet','house_age','pools','Orange','Ventura']
 f6 = wr.select_kbest(X_train, y_train, 4)
-f7 = X_train.columns.tolist()
+f7 = wr.select_kbest(X_train, y_train, 2)
+f8 = X_train.columns.tolist()
 
 # create a dictionary with features
 features = {
@@ -90,7 +91,8 @@ features = {
     'f4':f4,
     'f5':f5,
     'f6':f6,
-    'f7':f7
+    'f7':f7,
+    'f8':f8
 }
 
 ############### EVALUATION FUNCTIONS #############
@@ -292,9 +294,9 @@ def run_single():
         # predictions of the validate set
         y_hat_validate = model.predict(X2[[f]])
         # add train set predictions to the data frame
-        predictions_train[key] = y_hat_train
+        predictions_train['single'] = y_hat_train
         # add validate set predictions to the data frame
-        predictions_validate[key] = y_hat_validate
+        predictions_validate['single'] = y_hat_validate
 
         # calculate scores train set
         RMSE, R2 = regression_errors(y_train, y_hat_train)
@@ -306,11 +308,15 @@ def run_single():
         scores.loc[len(scores.index)] = ['Single Linear Regression', f, 'standard', RMSE, R2, RMSE_val, R2_val, diff]
 
 def run_all_models():
+    '''
+    the function runs all models and saves the results to csv file
+    '''
     run_model_standard()
     run_model_quantile()
     run_rfe()
     run_polynomial()
     run_single()
+    scores.to_csv('regression_results.csv')
 
 ############# SELECT AND RUN THE BEST MODEL #############
 
@@ -391,6 +397,7 @@ def run_best_model():
     # save final score into a dictionary
     res = {
         'Features': str(f),
+        'RMSE baseline': RMSE_bl,
         'RMSE Train Set': RMSE_train,
         'RMSE Validation Set':RMSE_val,
         'RMSE Test Set':RMSE_test,
