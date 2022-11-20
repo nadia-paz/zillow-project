@@ -8,7 +8,7 @@ import scipy.stats as stats
 
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-##################
+######## GLOBAL VARIABLES ##########
 cat_vars = ['bedrooms', 'bathrooms', 'county_name']
 cont_vars = ['sq_feet', 'lot_sqft', 'home_value', 'house_age']
 palettes = ['flare', 'Blues_r', 'PuRd_r', 'Accent']
@@ -16,16 +16,22 @@ colors_sns = sns.color_palette("flare")
 colors_sns2 = sns.color_palette("Blues_r")
 ##################
 
+# set confidence interval to 95%
 alpha = 0.05
 
 
-####### PROJECT FUNCTIONS ###########
+####### EXPLORATION FUNCTIONS ###########
 def vif(df):
+    '''
+    the function accepts a data frame as a parameter
+    calculates the varince inflation factor
+    returns a data frame with results sorted by VIF
+    '''
     vif_data = pd.DataFrame()
     vif_data['features'] = df.drop(columns='county_name').columns
     vif_data['VIF'] = [variance_inflation_factor(df.drop(columns='county_name').\
                                                  values, i) for i in range(len(df.columns)-1)]
-    display(vif_data.sort_values(by='VIF', ascending=False))
+    return vif_data.sort_values(by='VIF', ascending=False)
 
 ########## VISUALIZATIONS ########
 
@@ -55,8 +61,8 @@ def price_distribution(df):
     plt.ylabel('Percentage', fontsize=16)
 
     # calculate the values for the text on the graph
-    median = df.home_value.median()
-    mean = df.home_value.mean()
+    #median = df.home_value.median()
+    #mean = df.home_value.mean()
     out = pd.cut(df.home_value, bins)
     interval = str(out.value_counts().reset_index().iloc[0, 0])
 
@@ -230,114 +236,4 @@ def sqfeet_test(df):
         print(f'{key:<8} correlation coefficient is {round(corr, 2): >5}')
         print()
 
-
-
-####### END OF PROJECT FUNCTIONS #########
-
-def pairplot_data(df):
-    '''
-    the function take a zillow data frame as an argument
-    creates a random sample n=100_000 for faster visualiztions
-    creates a pairplot with regression line for numeric variables
-    '''
-    # draw a sample
-    #sample = df.sample(100_000, random_state=2912)
-    
-    #define columns
-    col_pairplot = ['bedrooms', 'bathrooms', 'sq_feet', 'lot_sqft', 'home_value', 'year_built', 'house_age']
-    
-    # create a pairplot
-    sns.pairplot(data=df[col_pairplot], kind='reg', plot_kws={'line_kws':{'color':'red'}}, corner=True)
-    plt.show()
-
-def correlation_and_heatmap(df):
-    '''
-    accepts a zillow data frame as an argument
-    creates a correlation matrix and displays a heatmap
-    '''
-    
-    # create a correlation matrix to see if there are liner correlations between variab
-    tax_corr = df.corr(method='spearman')
-    display(tax_corr)
-    
-    # pass my correlation matrix to Seaborn's heatmap
-    # trim the upper corner no remove duplicates
-    sns.heatmap(tax_corr, cmap='Purples', annot=True, 
-                mask=np.triu(tax_corr))
-    plt.show()
-
-########################
-
-def show_categ_vars(df):
-    '''
-    this function accepts a zillow data sample and the list
-    of categorical column names
-    builds histogram for every column from the list
-    '''
-    print('Categorical Variables:')
-    plt.figure(figsize=(16,4))
-    plt.suptitle('Categorical variables')
-    for i, col in enumerate(cat_vars):
-        plt.subplot(1, 3, i+1)
-        sns.histplot(data=df, x=col, bins=10, stat = 'percent', color=colors_sns[i])
-        plt.ylim(0,70)
-        plt.title(col)
-    plt.show()
-
-def show_cont_vars(df):
-    '''
-    this function accepts a zillow data sample and the list
-    of continuous column names
-    builds boxplots for every column from the list
-    '''
-    #sample = df.sample(100_000, random_state=2912)
-    print('Continuous Variables:')
-    plt.figure(figsize=(20, 4))
-    for i, col in enumerate(cont_vars):
-        plt.subplot(1, 4, i+1)
-        plt.title(col)
-        sns.boxplot(x=col, data=df, color=colors_sns2[i])
-        
-def show_cat_vs_cont(df, cat_vars, cont_vars):
-    '''
-    this function accepts a zillow data sample and 2 lists with
-    categorical and continuous columns
-    builds boxplots for every  cont column 
-    and histograms for every categorical column
-    '''
-    print('Categorical vs Continuous Variables:')
-    #number = 1
-    for j, cont in enumerate(cont_vars):
-        plt.figure(figsize=(20,4))
-        plt.suptitle(cont)
-        for i, cat in enumerate(cat_vars):
-            plt.subplot(1, 4, i+1)
-            sns.barplot(data=df, x=cat, y=cont, palette=palettes[j])
-            plt.title(cat + ' vs ' + cont)
-        plt.show()
-
-###########
-#### combine 3 func with categorical and continuous vars #####
-def plot_categorical_and_continuous_vars(df, cat_vars, cont_vars):
-    '''
-    this function accepts a zillow data sample and 2 lists with
-    categorical and continuous column names
-    builds 
-    - boxplots for every  cont column 
-    - histograms for every categorical column
-    - barplots that show relations between cat and cont variables
-    '''
-    t1 = t.Thread(target=show_categ_vars(df, cat_vars))
-    t2 = t.Thread(target=show_cont_vars(df, cont_vars))
-    t3 = t.Thread(target=show_cat_vs_cont(df, cat_vars, cont_vars))
-    
-    if __name__ =="__main__":
-        #print('Categorical Variables:')
-        t1.start()
-        t1.join()
-        #print('Continuous Variables:')
-        t2.start()
-        t2.join()
-        #print('Categorical vs Continuous Variables:')
-        t3.start()
-        t3.join()
+####### END OF EXPLORATION FUNCTIONS #########
