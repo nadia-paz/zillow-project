@@ -101,56 +101,32 @@
 99,Decision Tree Regression,rfe,standard,285684,0.34,281886,0.34,3798
 100,Random Forest Regression,rfe,standard,283188,0.35,279839,0.35,3349
 101,LassoLars Regression,rfe,standard,297363,0.29,292245,0.29,5118
-102,Linear Regression,f1_poly,standard,283704,0.35,278307,0.36,5397
-103,Generalized Linear Model,f1_poly,standard,293326,0.31,297805,0.27,4479
-104,Gradient Boosting Regression,f1_poly,standard,270110,0.41,270338,0.4,228
-105,Decision Tree Regression,f1_poly,standard,285200,0.34,282305,0.34,2895
-106,Random Forest Regression,f1_poly,standard,282170,0.36,279504,0.35,2666
-107,LassoLars Regression,f1_poly,standard,283704,0.35,278308,0.36,5396
-108,Linear Regression,f2_poly,standard,289608,0.32,283424,0.34,6184
-109,Generalized Linear Model,f2_poly,standard,300165,0.28,293880,0.29,6285
-110,Gradient Boosting Regression,f2_poly,standard,270048,0.41,269736,0.4,312
-111,Decision Tree Regression,f2_poly,standard,285674,0.34,282026,0.34,3648
-112,Random Forest Regression,f2_poly,standard,282947,0.35,279784,0.35,3163
-113,LassoLars Regression,f2_poly,standard,289608,0.32,283425,0.34,6183
-114,Linear Regression,f3_poly,standard,283677,0.35,278354,0.36,5323
-115,Generalized Linear Model,f3_poly,standard,292562,0.31,298404,0.26,5842
-116,Gradient Boosting Regression,f3_poly,standard,269674,0.41,270166,0.4,492
-117,Decision Tree Regression,f3_poly,standard,285109,0.34,282354,0.34,2755
-118,Random Forest Regression,f3_poly,standard,282053,0.36,279506,0.35,2547
-119,LassoLars Regression,f3_poly,standard,284577,0.35,279190,0.36,5387
-120,Linear Regression,f4_poly,standard,286549,0.34,281287,0.35,5262
-121,Generalized Linear Model,f4_poly,standard,293640,0.31,301329,0.25,7689
-122,Gradient Boosting Regression,f4_poly,standard,271020,0.41,270803,0.39,217
-123,Decision Tree Regression,f4_poly,standard,285144,0.34,281831,0.34,3313
-124,Random Forest Regression,f4_poly,standard,282509,0.36,279392,0.35,3117
-125,LassoLars Regression,f4_poly,standard,287432,0.33,282474,0.34,4958
-126,Linear Regression,f5_poly,standard,278986,0.37,274133,0.38,4853
-127,Generalized Linear Model,f5_poly,standard,288225,0.33,290497,0.3,2272
-128,Gradient Boosting Regression,f5_poly,standard,267871,0.42,268988,0.4,1117
-129,Decision Tree Regression,f5_poly,standard,284225,0.35,281108,0.35,3117
-130,Random Forest Regression,f5_poly,standard,280326,0.37,277663,0.36,2663
-131,LassoLars Regression,f5_poly,standard,281774,0.36,276591,0.37,5183
-132,Linear Regression,f6_poly,standard,282506,0.36,276987,0.37,5519
-133,Generalized Linear Model,f6_poly,standard,291370,0.32,291624,0.3,254
-134,Gradient Boosting Regression,f6_poly,standard,269052,0.42,269804,0.4,752
-135,Decision Tree Regression,f6_poly,standard,284768,0.35,282591,0.34,2177
-136,Random Forest Regression,f6_poly,standard,281635,0.36,279041,0.36,2594
-137,LassoLars Regression,f6_poly,standard,284771,0.35,279333,0.35,5438
-138,Linear Regression,f7_poly,standard,286575,0.34,281256,0.35,5319
-139,Generalized Linear Model,f7_poly,standard,294309,0.3,300348,0.25,6039
-140,Gradient Boosting Regression,f7_poly,standard,271175,0.41,270554,0.39,621
-141,Decision Tree Regression,f7_poly,standard,285144,0.34,281831,0.34,3313
-142,Random Forest Regression,f7_poly,standard,282614,0.36,279467,0.35,3147
-143,LassoLars Regression,f7_poly,standard,286575,0.34,281257,0.35,5318
-144,Linear Regression,f8_poly,standard,277837,0.38,273219,0.38,4618
-145,Generalized Linear Model,f8_poly,standard,287594,0.33,290085,0.3,2491
-146,Gradient Boosting Regression,f8_poly,standard,267400,0.42,269094,0.4,1694
-147,Decision Tree Regression,f8_poly,standard,284225,0.35,281108,0.35,3117
-148,Random Forest Regression,f8_poly,standard,280157,0.37,277610,0.36,2547
-149,LassoLars Regression,f8_poly,standard,283423,0.35,278237,0.36,5186
-150,Single Linear Regression,bedrooms,standard,342329,0.06,336890,0.06,5439
-151,Single Linear Regression,bathrooms,standard,331662,0.11,327084,0.12,4578
-152,Single Linear Regression,sq_feet,standard,301680,0.27,296552,0.27,5128
-153,Single Linear Regression,lot_sqft,standard,348182,0.02,343313,0.03,4869
-154,Single Linear Regression,house_age,standard,342565,0.05,337964,0.06,4601
+102,Linear Regression,poly1,standard,295375,0.3,290465,0.3,4910
+103,Generalized Linear Model,poly1,standard,304043,0.26,298901,0.26,5142
+104,Gradient Boosting Regression,poly1,standard,269987,0.41,269429,0.4,558
+105,Decision Tree Regression,poly1,standard,285674,0.34,282026,0.34,3648
+106,Random Forest Regression,poly1,standard,282944,0.35,279778,0.35,3166
+107,LassoLars Regression,poly1,standard,295375,0.3,290465,0.3,4910
+108,Linear Regression,poly2,standard,289608,0.32,283424,0.34,6184
+109,Generalized Linear Model,poly2,standard,300165,0.28,293880,0.29,6285
+110,Gradient Boosting Regression,poly2,standard,270048,0.41,269736,0.4,312
+111,Decision Tree Regression,poly2,standard,285674,0.34,282026,0.34,3648
+112,Random Forest Regression,poly2,standard,282947,0.35,279784,0.35,3163
+113,LassoLars Regression,poly2,standard,289608,0.32,283425,0.34,6183
+114,Linear Regression,poly3,standard,283704,0.35,278307,0.36,5397
+115,Generalized Linear Model,poly3,standard,296656,0.29,299090,0.26,2434
+116,Gradient Boosting Regression,poly3,standard,270110,0.41,270325,0.4,215
+117,Decision Tree Regression,poly3,standard,285200,0.34,282305,0.34,2895
+118,Random Forest Regression,poly3,standard,282170,0.36,279503,0.35,2667
+119,LassoLars Regression,poly3,standard,283704,0.35,278308,0.36,5396
+120,Linear Regression,poly4,standard,283124,0.35,277718,0.36,5406
+121,Generalized Linear Model,poly4,standard,296190,0.29,298846,0.26,2656
+122,Gradient Boosting Regression,poly4,standard,269468,0.41,270151,0.4,683
+123,Decision Tree Regression,poly4,standard,285111,0.34,282318,0.34,2793
+124,Random Forest Regression,poly4,standard,282014,0.36,279417,0.35,2597
+125,LassoLars Regression,poly4,standard,283125,0.35,277720,0.36,5405
+126,Single Linear Regression,bedrooms,standard,342329,0.06,336890,0.06,5439
+127,Single Linear Regression,bathrooms,standard,331662,0.11,327084,0.12,4578
+128,Single Linear Regression,sq_feet,standard,301680,0.27,296552,0.27,5128
+129,Single Linear Regression,lot_sqft,standard,348182,0.02,343313,0.03,4869
+130,Single Linear Regression,house_age,standard,342565,0.05,337964,0.06,4601
