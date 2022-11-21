@@ -1,14 +1,10 @@
 import pandas as pd
 import numpy as np
 
-from sklearn.model_selection import train_test_split
+
 from sklearn.preprocessing import  PolynomialFeatures
-
-
-from sklearn.feature_selection import SelectKBest, RFE, f_regression, SequentialFeatureSelector
-
-from sklearn.metrics import mean_squared_error, r2_score, explained_variance_score
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.feature_selection import RFE
+from sklearn.metrics import mean_squared_error, explained_variance_score
 
 # linear regressions
 from sklearn.linear_model import LinearRegression, LassoLars, TweedieRegressor
@@ -16,7 +12,6 @@ from sklearn.linear_model import LinearRegression, LassoLars, TweedieRegressor
 # non-linear regressions
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
-from sklearn.svm import SVR
 
 import wrangle as wr
 
@@ -231,30 +226,33 @@ def run_rfe():
         scores.loc[len(scores.index)] = [key, 'rfe', 'standard', RMSE, R2, RMSE_val, R2_val, diff]
 
 def run_polynomial():
-    # scale the data
-    #X1, X2, _ = wr.standard_scale_zillow(X_train, X_validate, X_test)
+
     
-    # only bedroom / bathroom polynomial
-    for f in features:
+    for i in range(1,5):
         # features[f] gives an access to the list of features in the dictionary
-        
+        #length = len(features[f])
         # create a Polynomial feature transformer
         poly = PolynomialFeatures(degree=2, include_bias=False, interaction_only=False)
-        poly.fit(X1[features[f]])
+        poly.fit(X1.iloc[:, :i])
         # create a df with transformed features of the train set
         X1_poly = pd.DataFrame(
-            poly.transform(X1[features[f]]),
-            columns=poly.get_feature_names(X1[features[f]].columns),
+            poly.transform(X1.iloc[:, :i]),
+            columns=poly.get_feature_names(X1.iloc[:, :i].columns),
             index=X1.index)
-        X1_poly = pd.concat([X1_poly, X1.iloc[:, 2:]], axis=1)
+        X1_poly = pd.concat([X1_poly, X1.iloc[:, i:]], axis=1)
+        #X1_poly = pd.concat([X1_poly, X1], axis=1)
+        
+        #display(X1_poly.head(1)) #testing the columns
+        
         # create a df with transformed features for the validate set
         X2_poly = pd.DataFrame(
-            poly.transform(X2[features[f]]),
-            columns=poly.get_feature_names(X2[features[f]].columns),
+            poly.transform(X2.iloc[:, :i]),
+            columns=poly.get_feature_names(X2.iloc[:, :i].columns),
             index=X2.index)
-        X2_poly = pd.concat([X2_poly, X2.iloc[:, 2:]], axis=1)
-        
-        feature_name = str(f)+'_poly'
+        X2_poly = pd.concat([X2_poly, X2.iloc[:, i:]], axis=1)
+        #X2_poly = pd.concat([X2_poly, X2], axis=1)
+                             
+        feature_name = 'poly'+str(i)
         
         for key in models:
             # create a model
@@ -278,7 +276,6 @@ def run_polynomial():
             
             # add the score results to the scores Data Frame
             scores.loc[len(scores.index)] = [key, feature_name, 'standard', RMSE, R2, RMSE_val, R2_val, diff]
-
 def run_single():
     # create a list ['bedrooms', 'bathrooms', 'sq_feet', 'lot_sqft', 'house_age']
     single_corr = X1.iloc[:, :-3].columns.tolist()
@@ -335,44 +332,40 @@ def run_best_model():
     '''
     the function runs the best model on the train, test and validate data sets 
     and returns scores in the data frame
-    model: Gradient Booster Regressor
-    features: polynomial featurs bedroom, bathrooms
     '''
     # create a data frame for test set results
     predictions_test = pd.DataFrame(y_test)
     predictions_test['baseline'] = baseline
 
-    f = f2
-    poly = PolynomialFeatures(degree=2, include_bias=False, interaction_only=False)
-    poly.fit(X1[f])
+    i = 2
 
+    # create a Polynomial feature transformer
+    poly = PolynomialFeatures(degree=2, include_bias=False, interaction_only=False)
+    poly.fit(X1.iloc[:, :i])
     # create a df with transformed features of the train set
     X1_poly = pd.DataFrame(
-                poly.transform(X1[f]),
-                columns=poly.get_feature_names(X1[f].columns),
-                index=X1.index)
-    X1_poly = pd.concat([X1_poly, X1.iloc[:, 2:]], axis=1)
+        poly.transform(X1.iloc[:, :i]),
+        columns=poly.get_feature_names(X1.iloc[:, :i].columns),
+        index=X1.index)
+    X1_poly = pd.concat([X1_poly, X1.iloc[:, i:]], axis=1)
+    #X1_poly = pd.concat([X1_poly, X1], axis=1)
+
+    #display(X1_poly.head(1)) #testing the columns
 
     # create a df with transformed features for the validate set
     X2_poly = pd.DataFrame(
-                poly.transform(X2[f]),
-                columns=poly.get_feature_names(X2[f].columns),
-                index=X2.index)
-    X2_poly = pd.concat([X2_poly, X2.iloc[:, 2:]], axis=1)
+        poly.transform(X2.iloc[:, :i]),
+        columns=poly.get_feature_names(X2.iloc[:, :i].columns),
+        index=X2.index)
+    X2_poly = pd.concat([X2_poly, X2.iloc[:, i:]], axis=1)
 
-    # create a df with transformed features for the validate set
-    X2_poly = pd.DataFrame(
-                poly.transform(X2[f]),
-                columns=poly.get_feature_names(X2[f].columns),
-                index=X2.index)
-    X2_poly = pd.concat([X2_poly, X2.iloc[:, 2:]], axis=1)
 
-    # create. df with transformed features for the test set
+    # create a df with transformed features for the test set
     X3_poly = pd.DataFrame(
-                poly.transform(X3[f]),
-                columns=poly.get_feature_names(X3[f].columns),
-                index=X3.index)
-    X3_poly = pd.concat([X3_poly, X3.iloc[:, 2:]], axis=1)
+        poly.transform(X3.iloc[:, :i]),
+        columns=poly.get_feature_names(X3.iloc[:, :i].columns),
+        index=X3.index)
+    X3_poly = pd.concat([X3_poly, X3.iloc[:, i:]], axis=1)
 
     # create a Gradient Boosting Regression model
     model = GradientBoostingRegressor()
@@ -396,8 +389,8 @@ def run_best_model():
     
     # save final score into a dictionary
     res = {
-        'Features': str(f),
-        'RMSE baseline': RMSE_bl,
+        'Features': 'poly: ' + str(X3.iloc[:, :i].columns.tolist()),
+        'RMSE Baseline' : RMSE_bl,
         'RMSE Train Set': RMSE_train,
         'RMSE Validation Set':RMSE_val,
         'RMSE Test Set':RMSE_test,

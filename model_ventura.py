@@ -14,6 +14,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 
 import wrangle as wr
+import modeling as md
 
 
 
@@ -44,7 +45,7 @@ XQ1, XQ2, XQ3 = wr.scale_zillow_quantile(X_train, X_validate, X_test)
 
 # get a baseline value = median of the train set's target
 baseline = y_train.median()
-
+#baseline = md.baseline
 
 # create dataframes to keep predictions of train and validate data sets
 predictions_train = pd.DataFrame(y_train)
@@ -228,30 +229,33 @@ def run_rfe():
         scores.loc[len(scores.index)] = [key, 'rfe', 'standard', RMSE, R2, RMSE_val, R2_val, diff]
 
 def run_polynomial():
-    # scale the data
-    #X1, X2, _ = wr.standard_scale_zillow(X_train, X_validate, X_test)
+
     
-    # only bedroom / bathroom polynomial
-    for f in features:
+    for i in range(1,5):
         # features[f] gives an access to the list of features in the dictionary
-        
+        #length = len(features[f])
         # create a Polynomial feature transformer
         poly = PolynomialFeatures(degree=2, include_bias=False, interaction_only=False)
-        poly.fit(X1[features[f]])
+        poly.fit(X1.iloc[:, :i])
         # create a df with transformed features of the train set
         X1_poly = pd.DataFrame(
-            poly.transform(X1[features[f]]),
-            columns=poly.get_feature_names(X1[features[f]].columns),
+            poly.transform(X1.iloc[:, :i]),
+            columns=poly.get_feature_names(X1.iloc[:, :i].columns),
             index=X1.index)
-        X1_poly = pd.concat([X1_poly, X1.iloc[:, 2:]], axis=1)
+        X1_poly = pd.concat([X1_poly, X1.iloc[:, i:]], axis=1)
+        #X1_poly = pd.concat([X1_poly, X1], axis=1)
+        
+        #display(X1_poly.head(1)) #testing the columns
+        
         # create a df with transformed features for the validate set
         X2_poly = pd.DataFrame(
-            poly.transform(X2[features[f]]),
-            columns=poly.get_feature_names(X2[features[f]].columns),
+            poly.transform(X2.iloc[:, :i]),
+            columns=poly.get_feature_names(X2.iloc[:, :i].columns),
             index=X2.index)
-        X2_poly = pd.concat([X2_poly, X2.iloc[:, 2:]], axis=1)
-        
-        feature_name = str(f)+'_poly'
+        X2_poly = pd.concat([X2_poly, X2.iloc[:, i:]], axis=1)
+        #X2_poly = pd.concat([X2_poly, X2], axis=1)
+                             
+        feature_name = 'poly'+str(i)
         
         for key in models:
             # create a model
@@ -339,50 +343,20 @@ def run_best_model():
     predictions_test = pd.DataFrame(y_test)
     predictions_test['baseline'] = baseline
 
-    f = f6
-    poly = PolynomialFeatures(degree=2, include_bias=False, interaction_only=False)
-    poly.fit(X1[f])
-
-    # create a df with transformed features of the train set
-    X1_poly = pd.DataFrame(
-                poly.transform(X1[f]),
-                columns=poly.get_feature_names(X1[f].columns),
-                index=X1.index)
-    X1_poly = pd.concat([X1_poly, X1.iloc[:, 2:]], axis=1)
-
-    # create a df with transformed features for the validate set
-    X2_poly = pd.DataFrame(
-                poly.transform(X2[f]),
-                columns=poly.get_feature_names(X2[f].columns),
-                index=X2.index)
-    X2_poly = pd.concat([X2_poly, X2.iloc[:, 2:]], axis=1)
-
-    # create a df with transformed features for the validate set
-    X2_poly = pd.DataFrame(
-                poly.transform(X2[f]),
-                columns=poly.get_feature_names(X2[f].columns),
-                index=X2.index)
-    X2_poly = pd.concat([X2_poly, X2.iloc[:, 2:]], axis=1)
-
-    # create. df with transformed features for the test set
-    X3_poly = pd.DataFrame(
-                poly.transform(X3[f]),
-                columns=poly.get_feature_names(X3[f].columns),
-                index=X3.index)
-    X3_poly = pd.concat([X3_poly, X3.iloc[:, 2:]], axis=1)
-
+    f = f8
+    print(f)
     # create a Gradient Boosting Regression model
-    model = RandomForestRegressor(max_depth=4, random_state=seed)
+    model = GradientBoostingRegressor()
     # display the model with hypermarameters
-    display(model)
+    #display(model)
     # fit the model
-    model.fit(X1_poly, y_train)
+    model.fit(X1[f], y_train)
     # predictions of the train set
-    y_hat_train = model.predict(X1_poly)
+    y_hat_train = model.predict(X1[f])
     # predictions of the validate set
-    y_hat_validate = model.predict(X2_poly)
+    y_hat_validate = model.predict(X2[f])
     # add train set predictions to the data frame
-    y_hat_test = model.predict(X3_poly)
+    y_hat_test = model.predict(X3[f])
     predictions_test['predictions'] = y_hat_test
 
     # calculate scores train set
@@ -407,6 +381,6 @@ def run_best_model():
     }
 
     # add the score results to the scores Data Frame
-    final_test = pd.DataFrame({'Random Forest Regression': list(res.keys()), 'Scores': list(res.values())})
+    final_test = pd.DataFrame({'Gradient Bosting Regression': list(res.keys()), 'Scores': list(res.values())})
 
     return final_test
