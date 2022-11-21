@@ -3,8 +3,8 @@ import pandas as pd
 import numpy as np
 
 # ignore warnings
-#import warnings
-#warnings.filterwarnings("ignore")
+import warnings
+warnings.filterwarnings("ignore")
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -169,8 +169,9 @@ def handle_outliers(df):
     # remove home values outliers
     # can not remvoe minimum outliers. way too many values
     #q = df.home_value.quantile(0.01)
-    #df = df[df.home_value > q] 
-    df = df[df.home_value < 2_000_000] # 519
+    #df = df[df.home_value > q]
+    #df = df[df.home_value > 30000]
+    df = df[df.home_value < 2_000_000] 
 
     # remove lot_sqft below quantile 0.99
     #q_lot = df.lot_sqft.quantile(0.99)
